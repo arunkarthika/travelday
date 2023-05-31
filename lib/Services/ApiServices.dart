@@ -14,7 +14,7 @@ class ApiService{
  // static String baseUrl = "https://api-emps.g10.pw/driver/app/";
 
   //static String baseUrl = "https://api-emps.g10.pw/escort/"; //Production
-  static String baseUrl = "https://mobile.travelday.in/api/"; //Development
+  static String baseUrl = "https://www.mobile.travelday.in/api/"; //Development
 
 
 

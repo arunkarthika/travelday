@@ -178,6 +178,18 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
         dio.options.headers['content-Type'] = 'application/json';
         //dio.options.headers["authorization"] = "Token ${token}";
         Response? response;
+
+        response = await dio.post(ApiService.baseUrl+"emergency_contacts/update/${str_userid}",
+            data: {
+              "user_id" : str_userid,
+              "name":name,
+              "emergency_mobile_number":mobile
+            },
+            options: Options(
+              //headers: {"Token": "$token"},
+            )
+        );
+
         if(s=="update")
           {
             response = await dio.post(ApiService.baseUrl+"emergency_contacts/update/${str_userid}",
@@ -258,11 +270,13 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
     }
   }
 
-  _showSingleChoiceDialog(BuildContext context, String s, String user_id) => showDialog(
+  _showSingleChoiceDialog(BuildContext context, String s, String user_id, String number, String name) => showDialog(
       context: context,
 
       barrierDismissible: false,
       builder: (context) {
+        empnameController.text=name;
+        mobilenumberController.text=number;
         String? groupvaluecity;
         return AlertDialog(
           elevation: 5,
@@ -706,7 +720,7 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
                                                       ),
                                                       InkWell(
                                                         onTap: (){
-                                                          _showSingleChoiceDialog(context,"update",_user_id[index]);
+                                                          _showSingleChoiceDialog(context,"update",_user_id[index],_emergencymobilenumber[index],_name[index]);
                                                         },
                                                         child:Icon(Icons.edit,color: Colors.grey,size: 20,),
                                                       )
@@ -754,14 +768,14 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
                 ],
               )
           ),
-          Padding(
+          _emergencymobilenumber.length>=5?Container():Padding(
             padding: const EdgeInsets.all(10.0),
             child: Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 backgroundColor: Color(0xFF013B46),
                 onPressed: (){
-                  _showSingleChoiceDialog(context,'create',"");
+                  _showSingleChoiceDialog(context,'create',"","","");
                 },child: Icon(Icons.add),
 
               ),

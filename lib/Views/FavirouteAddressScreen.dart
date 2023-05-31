@@ -9,6 +9,10 @@ import 'package:travelday/Utils/Validation.dart';
 import 'package:travelday/Views/DashboardScreen.dart';
 import 'package:dio/dio.dart';
 
+import '../Modal/favourite.dart';import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+
 
 class FavirouteAddressScreen extends StatefulWidget {
   final String str_place;
@@ -49,10 +53,9 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
 
 
   }
-  void profileUpdate(String name, String mobilenumber, String email,) async {
+  void profileUpdate(String name, String email,) async {
 
     print("str_name------>$name");
-    print("mobilenumber------>$mobilenumber");
     print("email------>$email");
     print("user_id------>$user_id");
 
@@ -79,7 +82,7 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
         print(response.toString());
 
         final data_response=jsonDecode(response.toString());
-        String str_status=data_response['data']['status'];
+        String str_status=data_response['message'];
         if(str_status=="error")
         {
           String str_message=data_response['data']['data'];
@@ -90,7 +93,7 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
         {
           if(str_status=="success")
             {
-            String str_message= data_response['data']['message'];
+            String str_message= data_response['message'];
             Validation.showErrormessage(_scafkey,str_message);
             }
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashBoardScreen()),);
@@ -312,7 +315,8 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
                       }
                     }else
                       {
-                        //profileUpdate(nameController.text.toString(), widget.str_mobile,emailController.text.toString());
+                        // addfav();
+                        profileUpdate(nameController.text.toString(),emailController.text.toString());
 
                       }
 
@@ -370,4 +374,38 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
       ),
     );
   }
+   addfav() async {
+    Dio dio = Dio();
+
+    dio.options.headers['content-Type'] = 'application/json';
+    //dio.options.headers["authorization"] = "Token ${token}";
+    Response response = await dio.post(ApiService.baseUrl+"favarite_location",
+      data: {
+              "name": nameController.text,
+              "place" :emailController.text,
+              "latitude" :emailController.text,
+              "longitude" :emailController.text,
+              "user_id" :"5",
+            },
+            options: Options(
+              // headers: {"Token": "$token"},
+            )
+    );
+    print("data coming");
+    print(response.data);
+    print(response.requestOptions.baseUrl);
+
+print(response.statusMessage);
+    if (response.statusCode == 200) {
+      setState(() {
+
+      });
+      Navigator.of(context).pop();
+
+      return FavouriteList.fromJson(response.data);
+    } else {
+      throw Exception('Failed to fetch movies');
+    }
+  }
+
 }

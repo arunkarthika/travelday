@@ -500,6 +500,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scafkey,
+      drawer: NavigationDrawerNew(_scafkey,''),
       appBar: AppBar(
         backgroundColor: Color(0xFF013B46),
         //leadingWidth: 35,

@@ -7,19 +7,20 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:travelday/Utils/Validation.dart';
 import 'package:travelday/Views/Assignedroute.dart';
 import 'package:travelday/Views/ProfileDetailsScreen.dart';
+import 'package:travelday/Views/fav.dart';
 
 
-class NavigationDrawer extends StatefulWidget {
+class NavigationDrawerNew extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalkey;
   final String name;
 
-  NavigationDrawer(this.globalkey, this.name);
+  NavigationDrawerNew(this.globalkey, this.name);
 
   @override
   _NavigationDrawer createState() => _NavigationDrawer(this.globalkey);
 }
 
-class _NavigationDrawer extends State<NavigationDrawer> {
+class _NavigationDrawer extends State<NavigationDrawerNew> {
   final GlobalKey<ScaffoldState> globa_lkey;
   _NavigationDrawer(this.globa_lkey);
   String?  version;
@@ -119,6 +120,7 @@ ignment.centerLeft,
         //CustomListTile(Icons.bluetooth,globa_lkey, 'Ibeacon List', () => {}),
         CustomListTile(Icons.perm_identity_outlined,globa_lkey, 'Profile', () => {}),
         CustomListTile(Icons.phone,globa_lkey, 'Emergency Contact', () => {}),
+        CustomListTile(Icons.favorite,globa_lkey, 'Favourites', () => {}),
         //CustomListTile(Icons.construction_rounded,globa_lkey, 'Break Down', () => {}),
         //CustomListTile(Icons.location_on_outlined,globa_lkey, 'Upcoming Routes', () => {}),
         //CustomListTile(Icons.location_on_outlined,globa_lkey, 'Tracking', () => {}),
@@ -261,6 +263,15 @@ class CustomListTile extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => ComplaintListScreen()),
               );*/
+
+            } else if(text=="Favourites")
+            {
+              print("Complaint");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavoriteListScreen()),
+              );
+
 
             }
             /*else if(text=="Attendance")
