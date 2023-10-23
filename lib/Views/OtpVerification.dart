@@ -162,7 +162,7 @@ class _OtpVerficationState extends State<OtpVerfication> {
         {
           //LoginFailureResponse loginData=LoginFailureResponse.fromJson(jsonDecode(res.toString()));
           print("Rsponse"+res.toString());
-          if(data['data']['status']=="error")
+          if(data['data']['status']=="error")F
           {
             try{
               _btnController1.stop();

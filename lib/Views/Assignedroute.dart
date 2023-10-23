@@ -98,6 +98,7 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
       _name.clear();
       _user_id.clear();
       _status.clear();
+      String str_userid=await _userAuth.getUserid()??'';
 
 
       print("date====${date}");
@@ -105,7 +106,7 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
         Dio dio = Dio();
         dio.options.headers['content-Type'] = 'application/json';
         //dio.options.headers["authorization"] = "Token ${token}";
-        Response response = await dio.get(ApiService.baseUrl+"emergency_contacts",
+        Response response = await dio.get(ApiService.baseUrl+"emergency_contacts/user-id/"+"${str_userid}",
             /*data: {
               //"tripDate": date
               //"date" :date
@@ -283,7 +284,7 @@ class _EmergencyContactListState extends State<EmergencyContactList> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          title: Text("Add Employee",textAlign: TextAlign.center,),
+          title: Text("Edit",textAlign: TextAlign.center,),
           content: SingleChildScrollView(
             child: Column(
               children: [

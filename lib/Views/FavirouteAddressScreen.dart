@@ -68,11 +68,11 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
         //dio.options.headers["authorization"] = "Token ${token}";
         Response response = await dio.post(ApiService.baseUrl+"favarite_location/create",
             data: {
-              "user_id" : 5,
-              "name":"home",
-              "place":"OTT popcorn., School Street, Puttuppedu, Karambakkam, Rajeswari Nagar, Porur, Chennai, Tamil Nadu",
-              "latitude":13.0382019,
-              "longitude":80.1579706
+              "user_id" : user_id,
+              "name":name,
+              "place":email,
+              "latitude":widget.pickuplat,
+              "longitude":widget.pickuplng
             },
             // options: Options(
             //   headers: {"Token": "$token"},
@@ -82,6 +82,7 @@ class _FavirouteAddressScreenState extends State<FavirouteAddressScreen> {
         print(response.toString());
 
         final data_response=jsonDecode(response.toString());
+        print(data_response);
         String str_status=data_response['message'];
         if(str_status=="error")
         {

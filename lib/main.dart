@@ -20,19 +20,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<int, Color> colorMap = {
-      50: Color.fromRGBO(147, 205, 72, .1),
-      100: Color.fromRGBO(147, 205, 72, .2),
-      200: Color.fromRGBO(147, 205, 72, .3),
-      300: Color.fromRGBO(147, 205, 72, .4),
-      400: Color.fromRGBO(147, 205, 72, .5),
-      500: Color.fromRGBO(147, 205, 72, .6),
-      600: Color.fromRGBO(147, 205, 72, .7),
-      700: Color.fromRGBO(147, 205, 72, .8),
-      800: Color.fromRGBO(147, 205, 72, .9),
-      900: Color.fromRGBO(147, 205, 72, 1),
+      50: Color.fromRGBO(1, 59, 70, .1),
+      100: Color.fromRGBO(1, 59, 70, .2),
+      200: Color.fromRGBO(1, 59, 70, .3),
+      300: Color.fromRGBO(1, 59, 70, .4),
+      400: Color.fromRGBO(1, 59, 70, .5),
+      500: Color.fromRGBO(1, 59, 70, .6),
+      600: Color.fromRGBO(1, 59, 70, .7),
+      700: Color.fromRGBO(1, 59, 70, .8),
+      800: Color.fromRGBO(1, 59, 70, .9),
+      900: Color.fromRGBO(1, 59, 70, 1),
     };
 // Green color code: 93cd48 and first two characters (FF) are alpha values (transparency)
-    MaterialColor customColor = MaterialColor(0xFF00c853, colorMap);
+    MaterialColor customColor = MaterialColor(0xFF013b46, colorMap);
     return MaterialApp(
       title: 'Travel Day',
       debugShowCheckedModeBanner: false,
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.green,
+        primarySwatch: MaterialColor(0xFF013b46,colorMap),
       ),
       home:  MyHomePage(),
     );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:travelday/Utils/UserStore.dart';
 
 import '../Modal/favourite.dart';
 
@@ -15,11 +16,18 @@ class FavoriteListScreen extends StatefulWidget {
 
 class _FavoriteListScreenState extends State<FavoriteListScreen> {
  FavouriteList movies = FavouriteList();
+ UserStore userStore=UserStore();
+ String userId="";
 
   @override
   void initState() {
     super.initState();
+    getUserId();
     fetchMovies();
+  }
+
+  void getUserId()async{
+    userId=await userStore.getUserid()??'';
   }
 
    Future<FavouriteList> fetchMovies() async {
@@ -27,7 +35,7 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
 
     dio.options.headers['content-Type'] = 'application/json';
     //dio.options.headers["authorization"] = "Token ${token}";
-    Response response = await dio.get(ApiService.baseUrl+"favarite_location",
+    Response response = await dio.get(ApiService.baseUrl+"favarite_location/user-id/${userId}",
       /*data: {
               //"tripDate": date
               //"date" :date
@@ -38,7 +46,7 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
     );
     print("data coming");
     print(response.data);
-    print(response.requestOptions.baseUrl);
+    print(response.requestOptions.data);
 
 
     if (response.statusCode == 200) {
@@ -64,7 +72,7 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
       appBar: AppBar(
         title: Text('Favorites'),
       ),
-      body: movies.data ==null?Center(child: CircularProgressIndicator()):ListView.builder(
+      body: movies.data == null?Center(child: CircularProgressIndicator()):movies.data!.data!.length==0?Center(child: Text('No Favourites'),):ListView.builder(
         itemCount:movies.data ==null?0:movies.data!.data!.length,
         itemBuilder: (context, index) {
           final movie = movies.data!.data![index];

@@ -14,7 +14,7 @@ class _MyAppState extends State<CCAVENE> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    // initPlatformState();
   }
 
   /// [initPlatformState] this calls the [cCAvenueInit]
@@ -48,7 +48,7 @@ class _MyAppState extends State<CCAVENE> {
         body: Center(
           child: ElevatedButton(
             onPressed: (){
-              initPlatformState();
+              // initPlatformState();
             }, child: Text('Payment Gateway'),
           ),
         ),
